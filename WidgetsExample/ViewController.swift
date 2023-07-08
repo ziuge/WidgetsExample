@@ -5,6 +5,7 @@
 //  Created by CHOI on 2023/07/07.
 //
 
+import WidgetKit
 import UIKit
 
 class ViewController: UIViewController {
@@ -43,7 +44,16 @@ class ViewController: UIViewController {
 
     @objc
     private func didTapButton() {
+        field.resignFirstResponder()
         
+        let userDefaults = UserDefaults(suiteName: "group.widgetexamplecache")
+        
+        guard let text = field.text, !text.isEmpty else {
+            return
+        }
+        
+        userDefaults?.setValue(text, forKey: "text")
+        WidgetCenter.shared.reloadAllTimelines() // 
     }
 }
 
